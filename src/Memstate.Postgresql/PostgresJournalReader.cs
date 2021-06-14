@@ -23,7 +23,7 @@ namespace Memstate.Postgres
             Ensure.NotNull(settings, nameof(settings));
 
             _settings = settings;
-            _serializer = Config.Current.CreateSerializer();
+            _serializer = Config.CreateDefault().CreateSerializer();
         }
 
         public IEnumerable<JournalRecord> GetRecords(long fromRecord = 0)

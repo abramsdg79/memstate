@@ -6,7 +6,7 @@ namespace Memstate.EventStore
     {
         public EventStoreSettings()
         {
-            var config = Config.Current;
+            var config = Config.CreateDefault();
             var memstateSettings = config.GetSettings<EngineSettings>();
             StreamName = memstateSettings.StreamName;
 

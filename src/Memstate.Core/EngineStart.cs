@@ -9,17 +9,17 @@ namespace Memstate
         /// Load an existing or create a new engine
         /// </summary>
         /// <returns>A task that completes when the engine is ready to process messages</returns>
-        public static Task<Engine<T>> Start<T>() where T : class
+        public static Task<Engine<T>> Start<T>(Config config) where T : class
         {
-            return new EngineBuilder().Build<T>();
+            return new EngineBuilder(config).Build<T>();
         }
 
-        public static async Task<Engine<T>> For<T>() where T : class
+        public static async Task<Engine<T>> For<T>(Config config) where T : class
         {
-            var container = Config.Current.Container;
+            var container = Config.CreateDefault().Container;
             if (!container.CanResolve<Engine<T>>())
             {
-                var engine = await Start<T>();
+                var engine = await Start<T>(config);
                 container.Register(engine);
             }
             return container.Resolve<Engine<T>>();

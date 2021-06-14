@@ -13,12 +13,12 @@ namespace Memstate
         /// <typeparam name="TModel">The 1st type parameter.</typeparam>
         public static async Task<Client<TModel>> For<TModel>() where TModel: class
         {
-            var cfg = Config.Current;
+            var cfg = Config.CreateDefault();
             var settings = cfg.GetSettings<ClientSettings>();
 
             if(settings.IsLocal)
             {
-                var engine = await Engine.For<TModel>();
+                var engine = await Engine.For<TModel>(cfg);
                 return new LocalClient<TModel>(engine);
             }
             else

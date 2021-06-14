@@ -9,9 +9,8 @@ namespace Memstate
         private readonly EngineSettings _settings;
         private readonly StorageProvider _storageProvider;
 
-        public EngineBuilder()
+        public EngineBuilder(Config config)
         {
-            var config = Config.Current;
             _settings = config.GetSettings<EngineSettings>();
             _storageProvider = config.GetStorageProvider();
             _storageProvider.Initialize();

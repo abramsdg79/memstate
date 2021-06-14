@@ -14,7 +14,7 @@ namespace Memstate.EventStore
 
         public EventStoreProvider()
         {
-            var config = Config.Current;
+            var config = Config.CreateDefault();
             _eventStoreSettings = config.GetSettings<EventStoreSettings>();
             //todo: consider opening the connection from Initialize
             _connection = EventStoreConnection.Create(_eventStoreSettings.ConnectionString);

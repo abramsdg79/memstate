@@ -15,7 +15,7 @@ namespace Memstate.Postgres
         public PostgresProvider()
         {
             _log = LogProvider.GetCurrentClassLogger();
-            Settings = Config.Current.GetSettings<PostgresSettings>();
+            Settings = Config.CreateDefault().GetSettings<PostgresSettings>();
         }
 
         static PostgresProvider()
@@ -57,7 +57,7 @@ namespace Memstate.Postgres
         public override IJournalWriter CreateJournalWriter(long nextRecordNumber)
         {
             // todo: nextRecordNumber unused
-            var serializer = Config.Current.CreateSerializer();
+            var serializer = Config.CreateDefault().CreateSerializer();
             return new PostgresJournalWriter(serializer, Settings);
         }
 

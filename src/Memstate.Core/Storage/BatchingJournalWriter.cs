@@ -10,7 +10,7 @@ namespace Memstate
 
         protected BatchingJournalWriter()
         {
-            var config = Config.Current;
+            var config = Config.CreateDefault();
             var settings = config.GetSettings<EngineSettings>();
             var maxBatchSize = settings.MaxBatchSize;
             var maxBatchQueueLength = settings.MaxBatchQueueLength;

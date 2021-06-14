@@ -14,7 +14,7 @@ namespace Memstate
 
         public FileJournalReader(string fileName)
         {
-            var cfg = Config.Current;
+            var cfg = Config.CreateDefault();
             var settings = cfg.GetSettings<EngineSettings>();
             _journalStream = cfg.FileSystem.OpenRead(fileName);
             _serializer = cfg.CreateSerializer();

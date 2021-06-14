@@ -15,7 +15,7 @@ namespace Memstate.EventStore
 
         public EventStoreWriter(IEventStoreConnection connection)
         {
-            var config = Config.Current;
+            var config = Config.CreateDefault();
             var settings = config.GetSettings<EventStoreSettings>();
             _connection = connection;
             _logger = LogProvider.GetCurrentClassLogger();

@@ -20,7 +20,7 @@ namespace Memstate
 
         public FileJournalWriter(string fileName, long nextRecord)
         {
-            var cfg = Config.Current;
+            var cfg = Config.CreateDefault();
             _nextRecord = nextRecord;
             _journalStream = cfg.FileSystem.OpenAppend(fileName);
             _serializer = cfg.CreateSerializer();

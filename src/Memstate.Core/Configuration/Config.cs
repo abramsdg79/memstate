@@ -14,22 +14,7 @@ namespace Memstate.Configuration
         /// </summary>
         internal Dictionary<string, string> Data { get; }
 
-        /// <summary>
-        /// Rebuilds the <see cref="Current"/> config from inputs,
-        /// discarding any modifications or cached settings objects. 
-        /// <returns>The newly reset Current config</returns>
-        public static Config Reset()
-        {
-            Current = null;
-            return Current;
-        }
-
         internal TinyIoCContainer Container { get; }
-
-        /// <summary>
-        /// Backing field of the Config.Current property
-        /// </summary>
-        private static Config _current;
 
         private StorageProvider _storageProvider;
 
@@ -39,31 +24,6 @@ namespace Memstate.Configuration
         private readonly Dictionary<Type, object> _singletonCache
             = new Dictionary<Type, object>();
 
-
-        /// <summary>
-        /// Synchronization object for the Config.Current field
-        /// </summary>
-        private static readonly object _lock = new object();
-
-        public static Config Current
-        {
-            get
-            {
-                if (_current == null)
-                {
-                    lock (_lock)
-                    {
-                        if (_current == null) _current = BuildDefault();
-                    }
-                }
-                
-                return _current;
-            }
-            internal set
-            {
-                lock(_lock) _current = value;
-            }
-        }
 
         /// <summary>
         /// Helper method to set the <see cref="Config.FileSystem"/> 
@@ -91,7 +51,7 @@ namespace Memstate.Configuration
 
         public ISerializer CreateSerializer(string serializer = null) => Serializers.Resolve(serializer ?? SerializerName);
 
-        private static Config BuildDefault()
+        public static Config CreateDefault()
         {
             var args = Environment.GetCommandLineArgs();
 

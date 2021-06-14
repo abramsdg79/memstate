@@ -56,7 +56,7 @@ namespace Memstate
 
         public RemoteClient()
         {
-            var cfg = Config.Current;
+            var cfg = Config.CreateDefault();
             _serializer = cfg.CreateSerializer();
             _deserializer = cfg.CreateSerializer();
             _pendingRequests = new Dictionary<Guid, TaskCompletionSource<Message>>();
