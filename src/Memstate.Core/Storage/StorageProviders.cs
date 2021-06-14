@@ -18,9 +18,9 @@ namespace Memstate
         private const string SqlStreamStoreProviderType = "Memstate.SqlStreamStore.SqlStreamStoreProvider, Memstate.SqlStreamStore";
         private const string PravegaProviderType = "Memstate.Pravega.PravegaProvider, Memstate.Pravega";
 
-        public StorageProviders()
+        public StorageProviders(Memstate.Configuration.Config config)
         {
-            Register(File, () => new FileStorageProvider());
+            Register(File, () => new FileStorageProvider(config));
             Register(EventStore, () => InstanceFromTypeName(EventStoreProviderType));
             Register(Postgres, () => InstanceFromTypeName(PostgresProviderType));
             Register(SqlStreamStore, () => InstanceFromTypeName(SqlStreamStoreProviderType));

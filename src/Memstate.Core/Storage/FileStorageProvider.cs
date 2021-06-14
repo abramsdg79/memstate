@@ -10,11 +10,11 @@ namespace Memstate
         private readonly EngineSettings _settings;
         private FileJournalWriter _currentWriter;
         private readonly IFileSystem _fileSystem;
+        private Config _cfg;
 
-
-        public FileStorageProvider()
+        public FileStorageProvider(Config cfg)
         {
-            var cfg = Config.CreateDefault();
+            _cfg = cfg;
             _settings = cfg.GetSettings<EngineSettings>();
             _fileStorageSettings = cfg.GetSettings<FileStorageSettings>();
             _fileSystem = cfg.FileSystem;
@@ -35,7 +35,7 @@ namespace Memstate
         public override IJournalWriter CreateJournalWriter(long nextRecordNumber)
         {
             var fileName = _fileStorageSettings.FileName;
-            _currentWriter = new FileJournalWriter(fileName, nextRecordNumber);
+            _currentWriter = new FileJournalWriter(fileName, nextRecordNumber, _cfg);
             return _currentWriter;
         }
 

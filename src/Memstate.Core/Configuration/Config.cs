@@ -7,7 +7,7 @@ using System.Text;
 namespace Memstate.Configuration
 {
 
-    public sealed class Config
+    public class Config
     {
         /// <summary>
         /// The underlying key value pairs with case insensitive keys
@@ -70,6 +70,7 @@ namespace Memstate.Configuration
             Data = args;
             Container = new TinyIoCContainer();
             Container.Register(this);
+            StorageProviders = new StorageProviders(this);
         }
 
         /// <summary>
@@ -134,7 +135,6 @@ namespace Memstate.Configuration
         }
 
         internal StorageProviders StorageProviders { get; set; }
-            = new StorageProviders();
 
         internal Serializers Serializers { get; set; }
             = new Serializers();

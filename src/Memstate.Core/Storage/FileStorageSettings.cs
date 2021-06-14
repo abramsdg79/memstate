@@ -8,9 +8,9 @@ namespace Memstate
 
         private readonly EngineSettings _memstateSettings;
 
-        public FileStorageSettings()
+        public FileStorageSettings(Config config)
         {
-            _memstateSettings = Config.CreateDefault().GetSettings<EngineSettings>();
+            _memstateSettings = config.GetSettings<EngineSettings>();
         }
 
         public string FileNameSuffix { get; set; } = ".journal";
